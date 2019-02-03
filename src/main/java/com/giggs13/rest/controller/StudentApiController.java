@@ -1,6 +1,7 @@
 package com.giggs13.rest.controller;
 
 import com.giggs13.rest.entity.Student;
+import com.giggs13.rest.error.StudentNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,13 @@ public class StudentApiController {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Student getById(@PathVariable int id) {
-        return students.get(id);
+        Student student = students.stream()
+                .filter(item -> item.getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (student == null) {
+            throw new StudentNotFoundException(id);
+        }
+        return student;
     }
 }
