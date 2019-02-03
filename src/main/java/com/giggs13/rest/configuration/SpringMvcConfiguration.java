@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.giggs13.rest")
-public class SpringMcvConfiguration
+public class SpringMvcConfiguration
         implements WebMvcConfigurer {
 
 }
